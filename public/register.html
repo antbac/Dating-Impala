@@ -1,24 +1,110 @@
 <div class="container">
   <div class="col-md-5 panel">
+    <h3 style="text-align: center;">Let others find you</h3>
+    <br>
     <div class="col-md-6">
-      Hair color<br>
-      <input type="text" ng-model="haircolor"><br>
-      Eye color<br>
-      <input type="text" ng-model="eyecolor"><br>
-      Height<br>
-      <input type="text" ng-model="height"><br>
-      Weight<br>
-      <input type="text" ng-model="weight"><br>
-      Age<br>
-      <input type="text" ng-model="age"><br>
+      Gender<br>
+      <label>
+        <input type="radio" ng-model="gender" value="man">
+        Man
+      </label>
+      <label>
+        <input type="radio" ng-model="gender" value="woman">
+        Woman
+      </label>
+      <br>Hair color<br>
+      <select name="hair" ng-model="hair">
+        <option value="brown">Black</option>
+        <option value="blonde">Blonde</option>
+        <option value="brown">Brown</option>
+        <option value="colorful">Colorful</option>
+        <option value="gray">Gray</option>
+        <option value="red">Red</option>
+        <option value="nohair">No hair</option>
+        <option value="other">Other</option>
+      </select>
+      <br>Eye color<br>
+      <select name="eye" ng-model="eye">
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="red">Red</option>
+        <option value="other">Other</option>
+      </select>
+      <br>Height (cm)<br>
+      <input type="number" min="50" max="400" ng-model="height">
+      <br>Ocupation<br>
+      <select name="ocupation" ng-model="ocupation">
+        <option value="studying">Studying</option>
+        <option value="working">Working</option>
+        <option value="between">Between jobs</option>
+        <option value="lotto">Lotto winner</option>
+        <option value="other">Other</option>
+      </select>
+      <br>Food preferences<br>
+      <select name="food" ng-model="food">
+        <option value="vegetarian">Vegetarian</option>
+        <option value="vegan">Vegan</option>
+        <option value="macrobiotic">Macrobiotic</option>
+        <option value="kosher">Kosher</option>
+        <option value="anything">Anything</option>
+      </select>
+      <br>Ethnicity<br>
+      <select name="ethnicity" ng-model="ethnicity">
+        <option value="africa">Africa</option>
+        <option value="american">American</option>
+        <option value="asian">Asian</option>
+        <option value="australia">Australia</option>
+        <option value="european">European</option>
+        <option value="latin">Latin America</option>
+        <option value="anything">Anything</option>
+      </select>
     </div>
     <div class="col-md-6">
-      Living in<br>
-      <input type="text" ng-model="livingin"><br>
-      Something<br>
-      <input type="text" ng-model=""><br>
-      Something<br>
-      <input type="text" ng-model=""><br>
+      Weight (kg)<br>
+      <input type="number" min="30" max="600" ng-model="weight">
+      <br>Age<br>
+      <input type="number" min="18" max="150" ng-model="age">
+      <br>Living in<br>
+      <select name="living" ng-model="living">
+        <option value="gothenburg">Gothenburg</option>
+        <option value="helsingborg">Helsingborg</option>
+        <option value="jonkoping">Jonkoping</option>
+        <option value="linkoping">Linkoping</option>
+        <option value="malmo">Malmo</option>
+        <option value="norrkoping">Norrkoping</option>
+        <option value="orebro">Orebro</option>
+        <option value="stockholm">Stockholm</option>
+        <option value="uppsala">Uppsala</option>
+        <option value="vasteras">Vasteras</option>
+        <option value="elsewhere">Elsewhere</option>
+      </select>
+      <br>Interests<br>
+      <input type="text" ng-model="interests" placeholder="Interest1, Interest2 ...">
+      <br>Personalities<br>
+      <input type="text" ng-model="personalities" placeholder="Fun, Smart, Silent ...">
+      <br>Education<br>
+      <select name="education" ng-model="education">
+        <option value="primary">Primary school</option>
+        <option value="high">High school</option>
+        <option value="university">University</option>
+        <option value="anything">Anything</option>
+      </select>
+      <br>Money<br>
+      <select name="money" ng-model="money">
+        <option value="ten">0 - 99</option>
+        <option value="hundred">100 - 999</option>
+        <option value="thousand">1.000 - 9.999</option>
+        <option value="hundredthousand">100.000 - 999.999</option>
+        <option value="million">1.000.000 - 999.999.999</option>
+        <option value="billion">1.000.000.000 - </option>
+        <option value="anything">Anything</option>
+      </select>
+    </div>
+    <div class="row col-xs-12 buffer"></div>
+    <div style="text-align:center;">
+      <button type="button" ng-click="register()" class="btn btn-info" style="width: 40%;">Register</button>
     </div>
   </div>
+
 </div>

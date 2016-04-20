@@ -5,9 +5,20 @@ var datingControllers = angular.module('datingControllers', []).run(function($ro
   datingControllers.controller('homepageController', ['$scope', '$http', '$location',
   function($scope, $http, $location) {
     $scope.search = function() {
-      console.log("Looking !!!");
+      if (!$scope.gender) { alert("You have to fill in the gender"); return;}
+      if (!$scope.hair) { alert("You have to fill in the hair color"); return;}
+      if (!$scope.eye) { alert("You have to fill in the eye color"); return;}
+      if (!$scope.ocupation) { alert("You have to fill in the ocupation"); return;}
+      if (!$scope.food) { alert("You have to fill in the food preferences"); return;}
+      if (!$scope.ethnicity) { alert("You have to fill in the ethnicity"); return;}
+      if (!$scope.body) { alert("You have to fill in the body type"); return;}
+      if (!$scope.age) { alert("You have to fill in the approximate age"); return;}
+      if (!$scope.living) { alert("You have to fill in the living area"); return;}
+      if (!$scope.education) { alert("You have to fill in the education"); return;}
+      if (!$scope.money) { alert("You have to fill in the money field"); return;}
+      //$http.post('/API/countmembers').success(function(response) {}
     };
-    
+
     $scope.temp = "Hello homepage";
     console.log($scope.temp);
     document.body.style.backgroundImage = "url('images/couple_beach.jpg')";
@@ -35,8 +46,21 @@ var datingControllers = angular.module('datingControllers', []).run(function($ro
 
 datingControllers.controller('registerController', ['$scope', '$http', '$location',
   function($scope, $http, $location) {
-    $scope.temp = "Hello register";
-    console.log($scope.temp);
+    $scope.register = function() {
+      if (!$scope.gender) { alert("You have to fill in your gender"); return;}
+      if (!$scope.hair) { alert("You have to fill in your hair color"); return;}
+      if (!$scope.eye) { alert("You have to fill in your eye color"); return;}
+      if (!$scope.height) { alert("You have to fill in your height"); return;}
+      if (!$scope.ocupation) { alert("You have to fill in your ocupation"); return;}
+      if (!$scope.food) { alert("You have to fill in your food preferences"); return;}
+      if (!$scope.ethnicity) { alert("You have to fill in your ethnicity"); return;}
+      if (!$scope.weight) { alert("You have to fill in your weight"); return;}
+      if (!$scope.age) { alert("You have to fill in your approximate age"); return;}
+      if (!$scope.living) { alert("You have to fill in your living area"); return;}
+      if (!$scope.education) { alert("You have to fill in your level of education"); return;}
+      if (!$scope.money) { alert("You have to fill in your money field"); return;}
+      //$http.post('/API/countmembers').success(function(response) {}
+    };
     document.body.style.backgroundImage = "url('images/couple1.jpg')";
   }
 ]);
