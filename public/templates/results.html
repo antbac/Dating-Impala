@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="col-md-12 panel">
+    <div ng-repeat="person in results track by $index" ng-click="person.active = !person.active" ng-class="{'notlast' : $index !== results.length - 1 && !person.active}" style="margin-top: .2em;">
+      <table class='table borderless' ng-class="{'selected' : person.active}">
+        <tr>
+          <td align="center">
+            <h3>{{person.name}}</h3>
+          </td>
+          <td align="center">
+            <h3>Age {{person.age}}</h3>
+          </td>
+        </tr>
+      </table>
+      <div ng-show="person.active" class="animate-show" ng-class="{'notlast' : $index !== results.length - 1}">
+        <table class='table borderless'>
+          <tr>
+            <td align="center">
+              <h3>{{person.hair}} hair</h3>
+            </td>
+            <td align="center">
+              <h3>{{person.eye}} eyes</h3>
+            </td>
+            <td align="center">
+              <h3>{{person.ocupation}}</h3>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <h3>{{person.body}} body</h3>
+            </td>
+            <td align="center">
+              <h3>Living in {{person.living}}</h3>
+            </td>
+            <td align="center">
+              <h3>Wealth {{person.money}}</h3>
+            </td>
+          </tr>
+        </table>
+        <table class='table borderless'>
+          <tr>
+            <th colspan="2" style="text-align: center">
+              Interests
+            </th>
+            <th colspan="2" style="text-align: center">
+              Personalities
+            </th>
+          </tr>
+          <tr ng-repeat="interest in person.int1 track by $index">
+            <td align="center">
+              {{interest}}
+            </td>
+            <td align="center">
+              {{person.int2[$index]}}
+            </td>
+            <td align="center">
+              {{person.per1[$index]}}
+            </td>
+            <td align="center">
+              {{person.per2[$index]}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

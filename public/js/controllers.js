@@ -1,10 +1,10 @@
-var datingControllers = angular.module('datingControllers', []).run(function($rootScope, $location) {
+var datingControllers = angular.module('datingControllers', ['ngAnimate']).run(function($rootScope, $location) {
   $rootScope.location = $location;
 });
 
-  datingControllers.controller('homepageController', ['$scope', '$http', '$location',
-  function($scope, $http, $location) {
-    console.log("Using homepageController");
+  datingControllers.controller('homepageController', ['$scope', '$http', '$location', 'ResultsService',
+  function($scope, $http, $location, results) {
+    document.body.style.backgroundImage = "url('images/couple_beach.jpg')";
     $scope.search = function() {
       if (!$scope.gender) { alert("You have to fill in the gender"); return;}
       if (!$scope.hair) { alert("You have to fill in the hair color"); return;}
@@ -24,15 +24,16 @@ var datingControllers = angular.module('datingControllers', []).run(function($ro
         age: $scope.age,
         living: $scope.living,
         education: $scope.education,
-        money: $scope.money})
+        money: $scope.money,
+        interests: $scope.interests,
+        personalities: $scope.personalities})
         .success(function(data, status) {
-          for (var i = 0; i < data.length; i++) {
-            console.log(data[i]);
-          }
+          console.log(data);
+          results.results = data;
+          $location.hash("");
+          $location.path("/results");
         });
     };
-
-    document.body.style.backgroundImage = "url('images/couple_beach.jpg')";
 
     $http.get('/API/countmembers').success(function(response) {
       $scope.members = response;
@@ -57,7 +58,7 @@ var datingControllers = angular.module('datingControllers', []).run(function($ro
 
 datingControllers.controller('registerController', ['$scope', '$http', '$location',
   function($scope, $http, $location) {
-    console.log("Using registerController");
+    document.body.style.backgroundImage = "url('images/couple1.jpg')";
     $scope.register = function() {
       if (!$scope.gender) { alert("You have to fill in your gender"); return;}
       if (!$scope.hair) { alert("You have to fill in your hair color"); return;}
@@ -90,21 +91,43 @@ datingControllers.controller('registerController', ['$scope', '$http', '$locatio
         education: $scope.education,
         money: $scope.money})
         .success(function(data, status) {
-          for (var i = 0; i < data.length; i++) {
-            console.log(data[i]);
-          }
+          alert("Thanks for joining Dating Impala");
+          $location.hash("");
+          $location.path("/homepage");
         });
 
     };
-    document.body.style.backgroundImage = "url('images/couple1.jpg')";
   }
 ]);
 
-datingControllers.controller('resultController', ['$scope', '$http', '$location',
-  function($scope, $http, $location) {
-    $scope.temp = "Hello result";
-    console.log($scope.temp);
-    document.body.style.backgroundImage = "url('images/couple3.jpg')";
+datingControllers.controller('resultsController', ['$scope', '$http', '$location', 'ResultsService',
+  function($scope, $http, $location, results) {
+    document.body.style.backgroundImage = "url('images/hearts.jpg')";
+    if (!results.results.length) {
+      $location.hash("");
+      $location.path("/homepage");
+    }
+    console.log(results);
+    $scope.results = results.results;
+    for (var i = 0; i < $scope.results.length; i++) {
+      $scope.results[i].active = false;
+      $scope.results[i].int1 = $scope.results[i].interests.slice(0, Math.ceil($scope.results[i].interests.length/2));
+      $scope.results[i].int2 = $scope.results[i].interests.slice(Math.ceil($scope.results[i].interests.length/2), $scope.results[i].interests.length);
+      $scope.results[i].per1 = $scope.results[i].personalities.slice(0, Math.ceil($scope.results[i].personalities.length/2));
+      $scope.results[i].per2 = $scope.results[i].personalities.slice(Math.ceil($scope.results[i].personalities.length/2), $scope.results[i].personalities.length);
+      while ($scope.results[i].per1.length < $scope.results[i].int1.length) {
+        $scope.results[i].per1.push("");
+      }
+      while ($scope.results[i].per1.length > $scope.results[i].int1.length) {
+        $scope.results[i].int1.push("");
+      }
+      while ($scope.results[i].per2.length < $scope.results[i].int1.length) {
+        $scope.results[i].per2.push("");
+      }
+      while ($scope.results[i].int2.length < $scope.results[i].int1.length) {
+        $scope.results[i].int2.push("");
+      }
+    }
   }
 ]);
 

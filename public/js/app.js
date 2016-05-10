@@ -2,7 +2,8 @@
   var app = angular.module("dating", [
   'ngRoute',
   'datingControllers',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngAnimate'
   ]);
 
   app.config(['$routeProvider',
@@ -20,9 +21,9 @@
         templateUrl: 'templates/search.html',
         controller: 'searchController'
       }).
-      when('/result', {
-        templateUrl: 'templates/result.html',
-        controller: 'resultController'
+      when('/results', {
+        templateUrl: 'templates/results.html',
+        controller: 'resultsController'
       }).
       otherwise({
         redirectTo: '/homepage'

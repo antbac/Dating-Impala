@@ -15,51 +15,12 @@
 @yellow-odd: #E8CA0E;
 @yellow-even: #F0D73A;
 
-.html, body
-{
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-div.white.clickable:hover
-{
-	background-color: @white-hover;
-	cursor: pointer;
-}
-button.red
-{
-  background-color: @red;
-}
-button.red.clickable:hover
-{
-  background-color: @red-hover;
-  cursor: pointer;
-}
-button.yellow
-{
-  background-color: @yellow;
-}
-button.yellow.clickable:hover
-{
-  background-color: @yellow-hover;
-  cursor: pointer;
-}
-button.green
-{
-  background-color: @green;
-}
-button.green.clickable:hover
-{
-  background-color: @green-hover;
-  cursor: pointer;
-}
-span.blue,
-button.blue
+
+span.blue
 {
   background-color: @blue;
 }
-span.blue.clickable:hover,
-button.blue.clickable:hover
+span.blue.clickable:hover
 {
   background-color: @blue-hover;
   cursor: pointer;
@@ -72,129 +33,14 @@ span.text-light-gray
 {
   color: @light-gray;
 }
-table.table-striped.booked > tbody > tr:nth-child(odd) > td{
- background-color: #4FF07F;
-}
-table.table-striped.booked > tbody > tr:nth-child(even) > td{
- background-color: #47FF70;
-}
-button.text-white,
 span.text-white,
 i.text-white
 {
   color: white;
 }
-td.text-red,
-h2.text-red,
-h4.text-red,
-span.text-red
-{
-  color: red;
-}
-span.text-red.clickable:hover
-{
-  color: @red-hover;
-  cursor: pointer;
-}
-span.text-yellow
-{
-  color: @yellow;
-}
-span.text-yellow.clickable:hover
-{
-  color: @yellow-hover;
-  cursor: pointer;
-}
-span.text-blue
-{
-  color: @blue;
-}
-span.text-blue.clickable:hover
-{
-  color: @blue-hover;
-  cursor: pointer;
-}
 .buffer
 {
   margin-bottom: 5%;
-}
-.center-content
-{
-  text-align: center;
-  padding: 5%;
-}
-.main-body
-{
-  position: absolute;
-  top: 5em;
-  width: 100%;
-}
-img.frame,
-button.frame
-{
-  border: solid #FFFFFF 1px;
-}
-
-table.table-striped > tbody > tr:nth-child(odd).pulse > td {
-  background-color: #B5DAF5;
-}
-
-table.table-striped > tbody > tr:nth-child(odd).pulse {
-  -webkit-animation: pulse 2s infinite;
-  -moz-animation: pulse 2s infinite;
-}
-
-table.table-striped > tbody > tr:nth-child(even).pulse > td {
-  background-color: #C5E7FF;
-}
-
-table.table-striped > tbody > tr:nth-child(even).pulse {
-  -webkit-animation: pulse 2s infinite;
-  -moz-animation: pulse 2s infinite;
-}
-
-@-webkit-keyframes pulse
-{
-  0% {-webkit-transform: scale(1);}
-  50% {-webkit-transform: scale(0.98);}
-}
-
-@-moz-keyframes pulse
-{
-  0% {transform: scale(1);}
-  5% {transform: scale(0.9922);}
-  10% {transform: scale(0.9845);}
-  15% {transform: scale(0.9773);}
-  20% {transform: scale(0.9706);}
-  25% {transform: scale(0.9646);}
-  30% {transform: scale(0.9595);}
-  35% {transform: scale(0.9554);}
-  40% {transform: scale(0.9524);}
-  45% {transform: scale(0.9506);}
-  50% {transform: scale(0.95);}
-  55% {transform: scale(0.9506);}
-  60% {transform: scale(0.9524);}
-  65% {transform: scale(0.9554);}
-  70% {transform: scale(0.9595);}
-  75% {transform: scale(0.9646);}
-  80% {transform: scale(0.9706);}
-  85% {transform: scale(0.9773);}
-  90% {transform: scale(0.9845);}
-  95% {transform: scale(0.9922);}
-  100% {transform: scale(1);}
-}
-
-.left-divider
-{
-  border-left: 1px solid rgb(180, 180, 180);
-}
-.expand
-{
-  width:100%;
-}
-button:focus
-{
-  outline: 0;
 }
 .navbar .container
 {
@@ -238,46 +84,6 @@ button:focus
 {
   color: #777777;
   cursor: default;
-}
-table.table-striped > tbody > tr.light-blue-background > td
-{
- background-color: #C5E7FF;
-}
-table.table-striped > tbody > tr:nth-child(odd).yellow-background > td
-{
- background-color: @yellow-odd;
-}
-table.table-striped > tbody > tr:nth-child(even).yellow-background > td
-{
- background-color: @yellow-even;
-}
-table.table-striped > tbody > tr:nth-child(odd).red-background > td
-{
- background-color: @red-odd;
-}
-table.table-striped > tbody > tr:nth-child(even).red-background > td
-{
- background-color: @red-even;
-}
-div.light-blue-background
-{
-  background-color: #C5E7FF;
-}
-div.light-blue-background:hover
-{
-  background-color: #B5DAF5;
-  cursor: pointer;
-}
-.search
-{
-  background: url(images/magnifying-glass.png) no-repeat;
-  background-position:right center
-}
-img.frame
-{
-  background-color: #FFFFFF;
-  padding: 5%;
-  border: 1px solid #DDDDDD;
 }
 .pointer:hover
 {
@@ -329,10 +135,8 @@ img
     overflow: hidden!important;
   }
 }
-
-
 body {
-  background-repeat:no-repeat;
+  background-repeat: repeat-y;
   background-size:cover;
 }
 .panel
@@ -342,4 +146,35 @@ body {
   padding: 2%;
   border: 1px solid #EEEEEE;
 
+}
+.borderless td, .borderless th {
+    border: none;
+}
+table {
+    table-layout: fixed;
+}
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+}
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.4s;
+}
+.animate-show.ng-hide {
+  opacity: 0;
+  padding: 0 10px;
+}
+.table th, .table td {
+     border-top: none !important;
+ }
+ .selected {
+   background-color: rgba(180,255,255,0.65);
+   border-radius: 25px;
+ }
+ ul {
+   list-style-type: none;
+ }
+.notlast {
+  border-bottom: 1px solid white;
 }
