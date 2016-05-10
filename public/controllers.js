@@ -69,8 +69,32 @@ datingControllers.controller('registerController', ['$scope', '$http', '$locatio
       if (!$scope.living) { alert("You have to fill in your living area"); return;}
       if (!$scope.education) { alert("You have to fill in your level of education"); return;}
       if (!$scope.money) { alert("You have to fill in your money field"); return;}
-      //$http.post('/API/countmembers').success(function(response) {}
-      console.log("Registered");
+      var bmi = $scope.weight/($scope.height*$scope.height);
+      var bodytype;
+      if (bmi <= 18.5) {
+        bodytype = "anorexic";
+      }else if (bmi > 18.5 && bmi < 25) {
+        bodytype = "standard";
+      }else {
+        bodytype = "fat";
+      }
+
+      $http.post('/API/register',
+      {gender: $scope.gender,
+        hair: $scope.hair,
+        eye: $scope.eye,
+        ocupation: $scope.ocupation,
+        body: bodytype,
+        age: $scope.age,
+        living: $scope.living,
+        education: $scope.education,
+        money: $scope.money})
+        .success(function(data, status) {
+          for (var i = 0; i < data.length; i++) {
+            console.log(data[i]);
+          }
+        });
+
     };
     document.body.style.backgroundImage = "url('images/couple1.jpg')";
   }

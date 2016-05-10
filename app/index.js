@@ -78,6 +78,13 @@ app.post('/API/search', function (req, res) {
   res.end();
 });
 
+app.post('/API/register', function (req, res) {
+  console.log("req:\n" + req.body.body);
+  res.writeHead(200);
+  res.write(JSON.stringify([{name: "Anton"},{name: "Siguash"}]));
+  res.end();
+});
+
 app.get('/login', function(req, res) {
   console.log(req.query);
   req.session.user = {};
