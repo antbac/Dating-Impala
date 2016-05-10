@@ -10,16 +10,8 @@ var Schema = mongoose.Schema;
 
 var Statistic = require('./statistic.js');
 
-var User = require('./user.js');
-var userSchema = User.schema;
-var Booking = require('./booking.js');
-var bookingSchema = Booking.schema;
-var Admin = require('./admin.js');
-var adminSchema = Admin.schema;
-var Completion = require('./completion.js');
-var completionSchema = Completion.schema;
-var Message = require('./message.js');
-var messageSchema = Message.schema;
+
+
 
 // Schema used for queues
 var queueSchema = new Schema({
@@ -28,12 +20,6 @@ var queueSchema = new Schema({
   hiding: { type: Boolean, default: false },
   motd: { type: String, default: "You can do it!" },
   info: { type: String, default: "Lorem Ipsum !!" },
-  queue: {type:[userSchema], default: []},
-  bookings: {type:[bookingSchema], default: []},
-  teacher: {type:[adminSchema], default: []},
-  assistant: {type:[adminSchema], default: []},
-  completions: {type:[completionSchema], default: []},
-  messages: {type:[messageSchema], default: []}
 });
 
 // Updates the MOTD

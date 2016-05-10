@@ -5,36 +5,7 @@ var queueSystem = require('../model/queueSystem.js');
 var validate = queueSystem.validate;
 var ldap = require('ldapjs-hotfix');
 
-var Admin = require("../model/admin.js"); // databas stuff
-
 module.exports = function (socket, io) {
-
-  function getUgKthid (uid, callback) {
-    var opts = {
-      filter: '(uid=' + uid + ')',
-      scope: 'sub'
-    };
-    var client = ldap.createClient({
-      url: 'ldaps://ldap.kth.se:636'
-    });
-    client.search('ou=Unix,dc=kth,dc=se', opts, function(err, res) {
-      res.on('searchEntry', function(entry) {
-        // console.log('entry: ' + JSON.stringify(entry.object));
-        console.log('entry: ' + entry.object.givenName);
-        console.log('ugKthid: ' + entry.object.ugKthid);
-        callback(entry.object.cn, entry.object.ugKthid);
-      });
-      res.on('searchReference', function(referral) {
-        console.log('referral: ' + referral.uris.join());
-      });
-      res.on('error', function(err) {
-        console.error('error: ' + err.message);
-      });
-      res.on('end', function(result) {
-        console.log('status: ' + result.status);
-      });
-    });
-  }
 
 
   // TODO remove duplicated
@@ -59,15 +30,7 @@ module.exports = function (socket, io) {
       return;
     }
     var message = req.message;
-    var ugKthid = socket.handshake.session.user.ugKthid;
-    console.log("sender = " + ugKthid);
 
-    // teacher/assistant-validation
-    if (!validate(ugKthid, "super", "")) {
-      console.log("validation for addServerMessage failed");
-      //res.end();
-      return;
-    }
 
     queueSystem.setGlobalMOTD(message);
     console.log('\'' + message + '\' added as a new global MOTD!');
@@ -82,13 +45,8 @@ module.exports = function (socket, io) {
       return;
     }
     console.log("Trying to add Queue!");
-    var ugKthid = socket.handshake.session.user.ugKthid;
     // admin-validation
-    if (!validate(ugKthid, "super", "queue")) {
-      console.log("validation for addQueue failed");
-      //res.end();
-      return;
-    }
+
 
     var queueName = req.queueName;
     var newQueue = queueSystem.addQueue(queueName);
@@ -133,22 +91,6 @@ module.exports = function (socket, io) {
     }
     //@TODO needs to fetch all the data from the ldap server.
 
-    getUgKthid(req.username, function(cn, ugKthid) {
-      console.log(cn);
-      console.log(ugKthid);
-      if(!queueSystem.addAdmin(cn, req.username, ugKthid, user.username)){
-        console.log(req.username + " already exists");
-        return;
-      }
-
-      console.log(req.username + ' is a new admin!');
-      io.to('admin').emit('addAdmin', {
-        realname: cn,
-        username: req.username,
-        ugKthid: ugKthid,
-        addedBy: user.username
-      });
-    });
   });
 
   socket.on('addTeacher', function (req) {
@@ -164,32 +106,6 @@ module.exports = function (socket, io) {
       //res.end();
       return;
     }
-
-    getUgKthid(req.username, function(cn, ugKthid) {
-      console.log(cn);
-      console.log(ugKthid);
-      var queue = queueSystem.findQueue(queueName);
-      var newTeacher = new Admin({
-        realname: cn,
-        username: req.username,
-        ugKthid: ugKthid,
-        addedBy: user.username
-      });
-      if(!queue.addTeacher(newTeacher)){
-        console.log(req.username + " already exists");
-        return;
-      }
-
-      console.log(req.username + ' is a new teacher!');
-
-      io.to('admin').emit('addTeacher', {
-        realname: cn,
-        username: req.username,
-        ugKthid: ugKthid,
-        addedBy: user.username,
-        queueName: queueName
-      });
-    });
   });
 
   socket.on('addAssistant', function (req) {
@@ -206,31 +122,6 @@ module.exports = function (socket, io) {
       //res.end();
       return;
     }
-    getUgKthid(req.username, function(cn, ugKthid) {
-      console.log(cn);
-      console.log(ugKthid);
-      var queue = queueSystem.findQueue(queueName);
-      var newAssistant = new Admin({
-        realname: cn,
-        username: req.username,
-        ugKthid: ugKthid,
-        addedBy: user.username
-      });
-      if (!queue.addAssistant(newAssistant)){
-        console.log(req.username + " already exists");
-        return;
-      }
-
-      console.log(req.username + ' is a new assistant!');
-
-      io.to('admin').emit('addAssistant', {
-        realname: cn,
-        username: req.username,
-        ugKthid: ugKthid,
-        addedBy: user.username,
-        queueName: queueName
-      });
-    });
   });
 
   //

@@ -11,10 +11,7 @@ var request = require('request');
 var http = require('http');
 
 var Queue = require("./queue.js");
-var User = require("./user.js");
-var Admin = require("./admin.js");
 var Statistic = require("./statistic.js");
-var GlobalMOTD = require("./globalMOTD.js");
 
 var queueList = [];
 var adminList = [];
@@ -83,14 +80,6 @@ exports.addAdmin = function (realname, username, ugKthid, addedBy) {
     return false;
     }
   }
-  var admin = new Admin({
-    realname: realname,
-    username: username,
-    ugKthid: ugKthid,
-    addedBy: addedBy
-  });
-  adminList.push(admin);
-  admin.save();
   return true;
 };
 
@@ -253,30 +242,6 @@ function setup() {
     "mdi"
   ];
 
-  globalMOTD = new GlobalMOTD({
-    message: "Hello World!"
-  });
-
-  globalMOTD.save();
-
-  var newAdmin = new Admin({
-    realname: "Anton Bäckström",
-    username: "antbac",
-    ugKthid: "u18dlezv",
-    addedBy: "root"
-  });
-  adminList.push(newAdmin);
-  newAdmin.save();
-
-  newAdmin = new Admin({
-    realname: "robert welin-berger",
-    username: "robertwb",
-    ugKthid: "u101x961",
-    addedBy: "root"
-  });
-  adminList.push(newAdmin);
-  newAdmin.save();
-
   // creates database-objects from the list (of queues)
   for (var i = 0; i < tmpList.length; i++) {
     var queue = tmpList[i];
@@ -294,22 +259,8 @@ function setup() {
     var queues = Math.floor((Math.random() * 50) + 1);
     for (var j = 0; j < queues; j++) {
       var rndName = Math.random().toString(36).substring(7);
-      var newUser = new User({
-        username: "username-" + rndName,
-        ugKthid: "ug-" + rndName,
-        realname: "real-" + rndName,
-        location: 'Green',
-        comment: 'lab1',
-        help: true,
-        completion: false,
-        startTime: randomTime
-      });
-      newQueue.addUser(newUser);
-      newQueue.save();
       var newStatistic = new Statistic({
-        username: newUser.username,
         queue: newQueue.username,
-        help: newUser.help,
         leftQueue: true,
         queueLength: newQueue.queue.length,
         helpAmount: newQueue.queue.length,
@@ -340,24 +291,6 @@ function readIn() {
       console.log('Queue: ' + queue.name + ' loaded!');
     });
     // exports.updateAllBookings()
-  });
-
-  // All the queues
-  Admin.find(function(err, admins) {
-    admins.forEach(function(admin) {
-      adminList.push(admin);
-      // to make sure everything loads
-      console.log('Admin: ' + admin.username + ' loaded!');
-    });
-  });
-
-  // All the queues
-  GlobalMOTD.find(function(err, globals) {
-    globals.forEach(function(global) {
-      // to make sure everything loads
-      console.log('Globals: ' + global + '!');
-      globalMOTD = global;
-    });
   });
 }
 
