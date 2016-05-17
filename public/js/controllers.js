@@ -9,26 +9,23 @@ var datingControllers = angular.module('datingControllers', ['ngAnimate']).run(f
       if (!$scope.gender) { alert("You have to fill in the gender"); return;}
       if (!$scope.hair) { alert("You have to fill in the hair color"); return;}
       if (!$scope.eye) { alert("You have to fill in the eye color"); return;}
-      if (!$scope.ocupation) { alert("You have to fill in the ocupation"); return;}
+      if (!$scope.occupation) { alert("You have to fill in the occupation"); return;}
       if (!$scope.body) { alert("You have to fill in the body type"); return;}
       if (!$scope.age) { alert("You have to fill in the approximate age"); return;}
       if (!$scope.living) { alert("You have to fill in the living area"); return;}
       if (!$scope.education) { alert("You have to fill in the education"); return;}
-      if (!$scope.money) { alert("You have to fill in the money field"); return;}
       $http.post('/API/search',
       {gender: $scope.gender,
         hair: $scope.hair,
         eye: $scope.eye,
-        ocupation: $scope.ocupation,
+        occupation: $scope.occupation,
         body: $scope.body,
         age: $scope.age,
         living: $scope.living,
         education: $scope.education,
-        money: $scope.money,
         interests: $scope.interests,
         personalities: $scope.personalities})
         .success(function(data, status) {
-          console.log(data);
           results.results = data;
           $location.hash("");
           $location.path("/results");
@@ -37,19 +34,19 @@ var datingControllers = angular.module('datingControllers', ['ngAnimate']).run(f
 
     $http.get('/API/countmembers').success(function(response) {
       $scope.members = response;
-      if($scope.members > 10){
+      if($scope.members >= 10){
         $scope.magnitude = "10's";
       }
-      if($scope.members > 100){
+      if($scope.members >= 100){
         $scope.magnitude = "hundreds";
       }
-      if($scope.members > 1000){
+      if($scope.members >= 1000){
         $scope.magnitude = "thousands";
       }
-      if($scope.members > 1000000){
+      if($scope.members >= 1000000){
         $scope.magnitude = "millions";
       }
-      if($scope.members > 1000000000){
+      if($scope.members >= 1000000000){
         $scope.magnitude = "billions";
       }
     });
@@ -61,15 +58,15 @@ datingControllers.controller('registerController', ['$scope', '$http', '$locatio
     document.body.style.backgroundImage = "url('images/couple1.jpg')";
     $scope.register = function() {
       if (!$scope.gender) { alert("You have to fill in your gender"); return;}
+      if (!$scope.name) { alert("You have enter your name"); return;}
       if (!$scope.hair) { alert("You have to fill in your hair color"); return;}
       if (!$scope.eye) { alert("You have to fill in your eye color"); return;}
       if (!$scope.height) { alert("You have to fill in your height"); return;}
-      if (!$scope.ocupation) { alert("You have to fill in your ocupation"); return;}
+      if (!$scope.occupation) { alert("You have to fill in your occupation"); return;}
       if (!$scope.weight) { alert("You have to fill in your weight"); return;}
       if (!$scope.age) { alert("You have to fill in your approximate age"); return;}
       if (!$scope.living) { alert("You have to fill in your living area"); return;}
       if (!$scope.education) { alert("You have to fill in your level of education"); return;}
-      if (!$scope.money) { alert("You have to fill in your money field"); return;}
       var bmi = $scope.weight/($scope.height*$scope.height);
       var bodytype;
       if (bmi <= 18.5) {
@@ -79,19 +76,23 @@ datingControllers.controller('registerController', ['$scope', '$http', '$locatio
       }else {
         bodytype = "fat";
       }
+      var interests = $scope.interests === undefined ? [] : $scope.interests.split(',').map(Function.prototype.call, String.prototype.trim);
+      var personalities = $scope.personalities === undefined ? [] : $scope.personalities.split(',').map(Function.prototype.call, String.prototype.trim);
 
       $http.post('/API/register',
       {gender: $scope.gender,
+        name: $scope.name,
         hair: $scope.hair,
         eye: $scope.eye,
-        ocupation: $scope.ocupation,
+        occupation: $scope.occupation,
         body: bodytype,
         age: $scope.age,
         living: $scope.living,
         education: $scope.education,
-        money: $scope.money})
+        interests: interests,
+        personalities: personalities})
         .success(function(data, status) {
-          alert("Thanks for joining Dating Impala");
+          alert("Thank you for joining Dating Impala");
           $location.hash("");
           $location.path("/homepage");
         });
@@ -107,7 +108,6 @@ datingControllers.controller('resultsController', ['$scope', '$http', '$location
       $location.hash("");
       $location.path("/homepage");
     }
-    console.log(results);
     $scope.results = results.results;
     for (var i = 0; i < $scope.results.length; i++) {
       $scope.results[i].active = false;

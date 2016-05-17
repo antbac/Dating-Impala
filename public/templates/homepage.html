@@ -2,70 +2,66 @@
   <div class="col-md-5 panel">
     <h3 style="text-align: center;">Search amoung {{magnitude}} of singles</h3>
     <br>
-    <div class="col-md-6">
-      Gender<br>
-      <label>
-        <input type="radio" ng-model="gender" value="man">
-        Man
-      </label>
-      <label>
-        <input type="radio" ng-model="gender" value="woman">
-        Woman
-      </label>
-      <br>Hair color<br>
-      <select name="hair" ng-model="hair">
-        <option value="brown">Black</option>
-        <option value="blonde">Blonde</option>
-        <option value="other">Other</option>
-      </select>
-      <br>Eye color<br>
-      <select name="eye" ng-model="eye">
-        <option value="blue">Blue</option>
-        <option value="brown">Brown</option>
-        <option value="other">Other</option>
-      </select>
-      <br>Height (cm)<br>
-      <input type="number" min="50" max="400" ng-model="height">
-      <br>Ocupation<br>
-      <select name="ocupation" ng-model="ocupation">
-        <option value="working">Working</option>
-        <option value="between">Between jobs</option>
-        <option value="other">Other</option>
-      </select>
-      <br>Body type<br>
-      <select name="body" ng-model="body">
-        <option value="anorexic">Anorexic</option>
-        <option value="standard">Standard</option>
-        <option value="fat">Fat</option>
-      </select>
+    <div class="row">
+      <div class="col-md-6">
+        Gender<br>
+        <label>
+          <input type="radio" ng-model="gender" value="male">
+          Man
+        </label>
+        <label>
+          <input type="radio" ng-model="gender" value="female">
+          Woman
+        </label>
+        <br>Hair color<br>
+        <select name="hair" ng-model="hair">
+          <option value="black">Black</option>
+          <option value="blonde">Blonde</option>
+          <option value="other">Other</option>
+        </select>
+        <br>Eye color<br>
+        <select name="eye" ng-model="eye">
+          <option value="blue">Blue</option>
+          <option value="brown">Brown</option>
+          <option value="other">Other</option>
+        </select>
+        <!--<br>Height (cm)<br>
+        <input type="number" min="120" max="200" ng-model="height">-->
+        <br>occupation<br>
+        <select name="occupation" ng-model="occupation">
+          <option value="working">Working</option>
+          <option value="between">Between jobs</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        Body type<br>
+        <select name="body" ng-model="body">
+          <option value="anorexic">Anorexic</option>
+          <option value="standard">Standard</option>
+          <option value="fat">Fat</option>
+        </select>
+        <br>Approximate age<br>
+        <input type="number" min="18" max="30" ng-model="age">
+        <br>Living in<br>
+        <select name="living" ng-model="living">
+          <option value="stockholm">Stockholm</option>
+          <option value="uppsala">Uppsala</option>
+          <option value="elsewhere">Elsewhere</option>
+        </select>
+        <!--<br>Interests<br>
+        <input type="text" ng-model="interests" placeholder="Interest1, Interest2 ...">
+        <br>Personalities<br>
+        <input type="text" ng-model="personalities" placeholder="Fun, Smart, Silent ...">-->
+        <br>Education<br>
+        <select name="education" ng-model="education">
+          <option value="primary">Primary school</option>
+          <option value="high">High school</option>
+          <option value="university">University</option>
+        </select>
+      </div>
     </div>
-    <div class="col-md-6">
-      Approximate age<br>
-      <input type="number" min="18" max="150" ng-model="age">
-      <br>Living in<br>
-      <select name="living" ng-model="living">
-        <option value="stockholm">Stockholm</option>
-        <option value="uppsala">Uppsala</option>
-        <option value="elsewhere">Elsewhere</option>
-      </select>
-      <br>Interests<br>
-      <input type="text" ng-model="interests" placeholder="Interest1, Interest2 ...">
-      <br>Personalities<br>
-      <input type="text" ng-model="personalities" placeholder="Fun, Smart, Silent ...">
-      <br>Education<br>
-      <select name="education" ng-model="education">
-        <option value="primary">Primary school</option>
-        <option value="high">High school</option>
-        <option value="university">University</option>
-      </select>
-      <br>Money<br>
-      <select name="money" ng-model="money">
-        <option value="minimal">0 - 999</option>
-        <option value="decent">1.000 - 99.999</option>
-        <option value="much">>100.000</option>
-      </select>
-    </div>
-    <div class="row col-xs-12 buffer"></div>
+    <div class="row buffer"></div>
     <div style="text-align:center;">
       <button type="button" ng-click="search()" class="btn btn-info" style="width: 40%;">Search</button>
     </div>
