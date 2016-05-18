@@ -14,6 +14,10 @@ var datingControllers = angular.module('datingControllers', ['ngAnimate']).run(f
       if (!$scope.age) { alert("You have to fill in the approximate age"); return;}
       if (!$scope.living) { alert("You have to fill in the living area"); return;}
       if (!$scope.education) { alert("You have to fill in the education"); return;}
+
+      var interests = $scope.interests === undefined ? [] : $scope.interests.split(',').map(Function.prototype.call, String.prototype.trim);
+      var personalities = $scope.personalities === undefined ? [] : $scope.personalities.split(',').map(Function.prototype.call, String.prototype.trim);
+
       $http.post('/API/search',
       {gender: $scope.gender,
         hair: $scope.hair,
@@ -23,9 +27,13 @@ var datingControllers = angular.module('datingControllers', ['ngAnimate']).run(f
         age: $scope.age,
         living: $scope.living,
         education: $scope.education,
-        interests: $scope.interests,
-        personalities: $scope.personalities})
+        interests: interests,
+        personalities: personalities})
         .success(function(data, status) {
+          if (!data.length) {
+            alert("Unfortunately there was no match for you");
+            return;
+          }
           results.results = data;
           $location.hash("");
           $location.path("/results");
@@ -67,7 +75,7 @@ datingControllers.controller('registerController', ['$scope', '$http', '$locatio
       if (!$scope.age) { alert("You have to fill in your approximate age"); return;}
       if (!$scope.living) { alert("You have to fill in your living area"); return;}
       if (!$scope.education) { alert("You have to fill in your level of education"); return;}
-      var bmi = $scope.weight/($scope.height*$scope.height);
+      var bmi = $scope.weight/(($scope.height/100)*($scope.height/100));
       var bodytype;
       if (bmi <= 18.5) {
         bodytype = "anorexic";
@@ -92,7 +100,7 @@ datingControllers.controller('registerController', ['$scope', '$http', '$locatio
         interests: interests,
         personalities: personalities})
         .success(function(data, status) {
-          alert("Thank you for joining Dating Impala");
+          alert("Thank you for joining Singles hive");
           $location.hash("");
           $location.path("/homepage");
         });

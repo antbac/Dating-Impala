@@ -16,38 +16,48 @@ router.get('/countmembers', function (req, res) {
 router.post('/search', function (req, res) {
   var ret = [];
   for (var i = 0; i < index.people.length; i++) {
-    var score = 0;
-    score = index.people[i].gender == req.body.gender ? score + 100 : score;
-    score = index.people[i].hair == req.body.hair ? score + 1 : score;
-    score = index.people[i].eye == req.body.eye ? score + 1 : score;
-    score = index.people[i].occupation == req.body.occupation ? score + 1 : score;
-    score = index.people[i].body == req.body.body ? score + 3 : score;
-    score = index.people[i].age >= req.body.age - 5 && req.body.age + 5 >= index.people[i].age ? score + 10 : score;
-    score = index.people[i].living == req.body.living ? score + 2 : score;
-    score = index.people[i].education == req.body.education ? score + 1 : score;
-    // Max score = 119
-    // Correct gender >= 100
-    // Correct age && gender >= 110
-    if (score >= 110) {
-      var p = index.people[i];
-      p.interests = [];
-      for (var j = 0; j < index.interests.length; j++) {
-        if (p.id == index.interests[j].id) {
-          for (var k = 0; k < index.interests[j].interest.length; k++) {
-            p.interests.push(index.interests[j].interest[k]);
+    if (index.people[i].gender == req.body.gender &&
+        index.people[i].hair == req.body.hair &&
+        index.people[i].eye == req.body.eye &&
+        index.people[i].occupation == req.body.occupation &&
+        index.people[i].body == req.body.body &&
+        index.people[i].age >= req.body.age - 5 && req.body.age + 5 >= index.people[i].age &&
+        index.people[i].living == req.body.living &&
+        index.people[i].education == req.body.education) {
+          var p = index.people[i];
+          var score = 0;
+          p.interests = [];
+          for (var j = 0; j < index.interests.length; j++) {
+            if (p.id == index.interests[j].id) { // Correct person
+              for (var k = 0; k < index.interests[j].interest.length; k++) { // Loop thourgh persons interests
+                for (var l = 0; l < req.body.interests.length; l++) { // Loop through wanted interests
+                  if (index.interests[j].interest[k] == req.body.interests[l]) {
+                    score++;
+                    break;
+                  }
+                }
+                p.interests.push(index.interests[j].interest[k]);
+              }
+            }
           }
-        }
-      }
-      p.personalities = [];
-      for (var l = 0; l < index.personalities.length; l++) {
-        if (p.id == index.personalities[l].id) {
-          for (var m = 0; m < index.personalities[l].personality.length; m++) {
-            p.personalities.push(index.personalities[l].personality[m]);
+          p.personalities = [];
+          for (var m = 0; m < index.personalities.length; m++) {
+            if (p.id == index.personalities[m].id) {
+              for (var n = 0; n < index.personalities[m].personality.length; n++) {
+                for (var o = 0; o < req.body.personalities.length; o++) {
+                  if (index.personalities[m].personality[n] == req.body.personalities[o]) {
+                    score++;
+                    break;
+                  }
+                }
+                p.personalities.push(index.personalities[m].personality[n]);
+              }
+            }
           }
-        }
-      }
-      p.score = score;
-      ret.push(p);
+          p.score = score;
+          if (p.score > 0) {
+            ret.push(p);
+          }
     }
   }
 

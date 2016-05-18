@@ -1,4 +1,6 @@
 <div class="container">
+  <div class="row buffer"></div>
+  <div class="row buffer"></div>
   <div class="col-md-5 panel">
     <h3 style="text-align: center;">Search amoung {{magnitude}} of singles</h3>
     <br>
@@ -25,14 +27,14 @@
           <option value="brown">Brown</option>
           <option value="other">Other</option>
         </select>
-        <!--<br>Height (cm)<br>
-        <input type="number" min="120" max="200" ng-model="height">-->
         <br>occupation<br>
         <select name="occupation" ng-model="occupation">
           <option value="working">Working</option>
           <option value="between">Between jobs</option>
           <option value="other">Other</option>
         </select>
+        <br>Interests<br>
+        <input type="text" ng-model="interests" placeholder="Interest1, Interest2 ...">
       </div>
       <div class="col-md-6">
         Body type<br>
@@ -49,16 +51,14 @@
           <option value="uppsala">Uppsala</option>
           <option value="elsewhere">Elsewhere</option>
         </select>
-        <!--<br>Interests<br>
-        <input type="text" ng-model="interests" placeholder="Interest1, Interest2 ...">
-        <br>Personalities<br>
-        <input type="text" ng-model="personalities" placeholder="Fun, Smart, Silent ...">-->
         <br>Education<br>
         <select name="education" ng-model="education">
           <option value="primary">Primary school</option>
           <option value="high">High school</option>
           <option value="university">University</option>
         </select>
+        <br>Personalities<br>
+        <input type="text" ng-model="personalities" placeholder="Fun, Smart, Silent ...">
       </div>
     </div>
     <div class="row buffer"></div>
@@ -66,5 +66,5 @@
       <button type="button" ng-click="search()" class="btn btn-info" style="width: 40%;">Search</button>
     </div>
   </div>
-
+  <img src="../images/logo.png"/ class="logo">
 </div>

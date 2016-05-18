@@ -22,7 +22,7 @@ app.use('/API', router);
 var interests = [];
 function getInterests() {
   var content;
-  fs.readFile('data/interests.txt', function read(err, data) {
+  fs.readFile('data/npminterests.txt', function read(err, data) {
       if (err) {
           throw err;
       }
@@ -38,7 +38,7 @@ getInterests();
 var personalities = [];
 function getPersonalities() {
   var content;
-  fs.readFile('data/personalities.txt', function read(err, data) {
+  fs.readFile('data/npmpersonalities.txt', function read(err, data) {
       if (err) {
           throw err;
       }
@@ -54,14 +54,14 @@ getPersonalities();
 var people = [];
 function getPeople() {
   var content;
-  fs.readFile('data/100000.txt', function read(err, data) {
+  fs.readFile('data/users.txt', function read(err, data) {
       if (err) {
           throw err;
       }
       content = data.toString('ascii').split('\n');
       for (var i = 0; i < content.length-1; i++) {
         var temp = content[i].split(',');
-        people.push({id: temp[0], gender: temp[1], name: temp[2], age: temp[3], hair: temp[4], eye: temp[5], height: temp[6], occupation: temp[7], body: temp[8], living: temp[9], education: temp[10]});
+        people.push({id: temp[0], gender: temp[1], name: temp[2], age: temp[3], hair: temp[4], eye: temp[5], occupation: temp[6], body: temp[7], living: temp[8], education: temp[9]});
       }
   });
 }
